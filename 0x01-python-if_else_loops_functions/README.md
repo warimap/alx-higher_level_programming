@@ -7,6 +7,13 @@ Project done during **Full Stack Software Engineering studies** at **ALX**. It a
 * C files are compiled using `gcc 4.8.4`
 * Tested on Ubuntu 14.04 LTS
 
+
+## General
+<a href="https://docs.google.com/document/d/1WH8fKUq-lhJt73c0EIolsVfVrF2rAkjO4gsa1aK1gic/edit?usp=sharingI">DOCUMENT CONTAINING EXPLAINED ANSWERS FOR THE GENERAL QUESTIONS OF THIS PROJECT </a> 
+
+
+
+
 ## Files
 | Filename | Description |
 | -------- | ----------- |
