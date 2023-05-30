@@ -1,87 +1,74 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+"""Node"""
 
 
-class Rectangle:
-    """Represent a rectangle.
-
-    Attributes:
-        number_of_instances (int): The number of Rectangle instances.
-        print_symbol (any): The symbol used for string representation.
+class Node:
+    """
+    Class Node
     """
 
-    number_of_instances = 0
-    print_symbol = "#"
-
-    def __init__(self, width=0, height=0):
-        """Initialize a new Rectangle.
-
-        Args:
-            width (int): The width of the new rectangle.
-            height (int): The height of the new rectangle.
-        """
-        type(self).number_of_instances += 1
-        self.width = width
-        self.height = height
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next_node = next_node
 
     @property
-    def width(self):
-        """Get/set the width of the Rectangle."""
-        return self.__width
+    def data(self):
+        """Data getter"""
+        return self.__data
 
-    @width.setter
-    def width(self, value):
-        if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        if value < 0:
-            raise ValueError("width must be >= 0")
-        self.__width = value
+    @data.setter
+    def data(self, value):
+        """Data setter"""
+        if type(value) is not int:
+            raise TypeError("data must be an integer")
+        self.__data = value
 
     @property
-    def height(self):
-        """Get/set the height of the Rectangle."""
-        return self.__height
+    def next_node(self):
+        """next_node getter"""
+        return self.__next_node
 
-    @height.setter
-    def height(self, value):
-        if not isinstance(value, int):
-            raise TypeError("height must be an integer")
-        if value < 0:
-            raise ValueError("height must be >= 0")
-        self.__height = value
+    @next_node.setter
+    def next_node(self, value):
+        if type(value) is not Node and value is not None:
+            raise TypeError("next_node must be a Node object")
+        self.__next_node = value
 
-    def area(self):
-        """Return the area of the Rectangle."""
-        return (self.__width * self.__height)
 
-    def perimeter(self):
-        """Return the perimeter of the Rectangle."""
-        if self.__width == 0 or self.__height == 0:
-            return (0)
-        return ((self.__width * 2) + (self.__height * 2))
+class SinglyLinkedList:
+    """Class SinglyLinkedList"""
+
+    def __init__(self):
+        self.__head = None
 
     def __str__(self):
-        """Return the printable representation of the Rectangle.
+        string = ""
+        temp = self.__head
 
-        Represents the rectangle with the # character.
-        """
-        if self.__width == 0 or self.__height == 0:
-            return ("")
+        while temp is not None:
+            string += str(temp.data)
+            temp = temp.next_node
+            if temp is not None:
+                string += "\n"
+        return string
 
-        rect = []
-        for i in range(self.__height):
-            [rect.append(str(self.print_symbol)) for j in range(self.__width)]
-            if i != self.__height - 1:
-                rect.append("\n")
-        return ("".join(rect))
+    def sorted_insert(self, value):
+        """Insert values"""
 
-    def __repr__(self):
-        """Return the string representation of the Rectangle."""
-        rect = "Rectangle(" + str(self.__width)
-        rect += ", " + str(self.__height) + ")"
-        return (rect)
+        new = Node(value)
+        if self.__head is None:
+            self.__head = new
+            return
 
-    def __del__(self):
-        """Print a message for every deletion of a Rectangle."""
-        type(self).number_of_instances -= 1
-        print("Bye rectangle...")
+        temp = self.__head
+
+        if new.data < temp.data:
+            new.next_node = self.__head
+            self.__head = new
+            return
+
+        while temp.next_node is not None and new.data > temp.next_node.data:
+            temp = temp.next_node
+        new.next_node = temp.next_node
+        temp.next_node = new
+        return
