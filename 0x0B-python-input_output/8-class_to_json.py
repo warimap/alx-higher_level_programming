@@ -15,4 +15,4 @@ def class_to_json(obj):
     Args:
         obj: python object
     """
-    return obj.__dict_1_
+    return obj.__dict__
